@@ -657,6 +657,7 @@ await server.connect(new StdioServerTransport());
       title: provider.id === 'codex' ? 'read: read a known small file in workspace' : 'read: read a known file in workspace',
       useAbsolutePath: provider.id === 'auggie',
       useExecuteFallbackOnReadFailure: provider.id === 'kimi' || provider.id === 'auggie',
+      assertSentinelInMessage: provider.id === 'agy',
     });
   },
 

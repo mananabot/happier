@@ -31,6 +31,7 @@ export function makeAcpReadInWorkspaceScenario(params: {
   content: string;
   useAbsolutePath?: boolean;
   useExecuteFallbackOnReadFailure?: boolean;
+  assertSentinelInMessage?: boolean;
 }): ProviderScenario {
   const filename = params.filename ?? 'e2e-read.txt';
   const filePathRel = filename;
@@ -70,7 +71,9 @@ export function makeAcpReadInWorkspaceScenario(params: {
       : {
           requiredFixtureKeys: [k(params.providerId, 'tool-call', 'Read'), k(params.providerId, 'tool-result', 'Read')],
         }),
-    requiredTraceSubstrings: [sentinel],
+    ...(params.assertSentinelInMessage
+      ? { requiredMessageSubstrings: [sentinel] }
+      : { requiredTraceSubstrings: [sentinel] }),
   };
 }
 
